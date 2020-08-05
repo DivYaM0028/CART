@@ -1,5 +1,5 @@
 import React from 'react';
-
+// Added funcitonal component
 const CartItem = (props) => {
     const {price , title , qty} = props.product;
     const {
