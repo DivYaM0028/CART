@@ -1,6 +1,7 @@
 import React from 'react';
 import Cart from './Cart';
 import Navbar from './Navbar';
+import './App.css';
 class App extends   React.Component {
   constructor (){
     super();
