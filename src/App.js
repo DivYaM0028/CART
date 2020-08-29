@@ -3,6 +3,7 @@ import Cart from './Cart';
 import Navbar from './Navbar';
 import './App.css';
 import * as firebase from 'firebase'
+import { doc } from 'prettier';
 class App extends   React.Component {
   constructor (){
     super();
@@ -56,11 +57,24 @@ handleIncreaseQuantity = (product) => {
     const{ products} = this.state;
     const index = products.indexOf(product);
 
-    products[index].qty += 1;
+    // products[index].qty += 1;
 
-    this.setState({
-        products: products
-        // products
+    // this.setState({
+    //     products: products
+    //     // products
+    // })
+
+  const docRef = this.db.collection('products').doc(products[index].id);
+
+  docRef
+    .update({
+      qty: products[index].qty+1
+    })
+    .then(() => {
+      console.log('Updated Succesfully!!')
+    })
+    .catch((error) =>{
+      console.log('Error:' , error);
     })
 }
 
@@ -130,7 +144,7 @@ addProduct = () =>{
     return (
       <div className="App">
             <Navbar count={this.getCartCount()} />
-            <button onClick={this.addProduct} style= {{padding:20 }}>Add a Product</button>
+            {/* <button onClick={this.addProduct} style= {{padding:20 }}>Add a Product</button> */}
             <Cart
             products = {products}
               onIncreaseQuantity = {this.handleIncreaseQuantity}
